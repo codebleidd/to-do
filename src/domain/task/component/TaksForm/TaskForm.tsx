@@ -1,20 +1,20 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Button } from '../../../app/component/Button/Button';
-import { Input, TextArea, Error, Label } from '../../../app/component/Form/Input.styled';
-import { TaskModel } from '../model/Task.model';
-import { Form, FormWrapper, InputWrapper } from './TaskForm.style';
+import { Button } from '../../../../app/component/Button/Button';
+import { Input, TextArea, Error, Label } from '../../../../app/component/Form/Input.styled';
+import { TaskModel } from '../../model/Task.model';
+import { FormStyled, FormWrapper, InputWrapper } from './TaskForm.style';
 
 export const TaskForm = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<TaskModel.Single>();
+  } = useForm<TaskModel.Create>();
 
-  const onSubmit: SubmitHandler<TaskModel.Single> = () => {};
+  const onSubmit: SubmitHandler<TaskModel.Create> = () => {};
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <FormWrapper>
         <InputWrapper>
           <Label>Task Name</Label>
@@ -30,6 +30,6 @@ export const TaskForm = () => {
 
         <Button type="submit">Add task</Button>
       </FormWrapper>
-    </Form>
+    </FormStyled>
   );
 };

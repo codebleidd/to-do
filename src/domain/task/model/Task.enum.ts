@@ -1,5 +1,5 @@
-export enum TaskStatus {
-  NEW = 'NEW',
+export enum TaskStatusEnum {
+  OPEN = 'OPEN',
   PENDING = 'PENDING',
   CLOSED = 'CLOSED',
 }

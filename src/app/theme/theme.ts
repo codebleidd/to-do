@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const theme = {
+export const appTheme = {
   shadow: {
     inset: 'inset 0 2px 2px hsla(0, 0%, 0%, 0.1)',
     0: '0 1px 3px rgba(0,0,0,0.12); 0 1px 2px rgba(0,0,0,0.24);',
@@ -9,7 +9,8 @@ export const theme = {
   border: { radius: '6px' },
   color: {
     error: '#EF4E4E',
-    warning: '#F0B429',
+    warning: '#CB6E17',
+    success: '#0C6B58',
     palette: {
       blue: {
         900: '#035388',
@@ -42,41 +43,59 @@ export const theme = {
 
 export const GlobalStyle = createGlobalStyle`
 body {
-  background-color: ${(props) => props.theme.color.palette.grey['900']};
+  background-color: ${({ theme }) => theme.color.palette.grey['900']};
   font-family: 'Merriweather', serif;
-  color: ${(props) => props.theme.color.palette.grey['50']};
+  color: ${({ theme }) => theme.color.palette.grey['50']};
+}
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0 0 8px;
+  padding: 0;
 }
 
 h1 {
   font-size: 60px;
   font-weight: 500;
   font-family: 'Open Sans', sans-serif;
+  margin-bottom: 32px;
 }
 
 h2 {
   font-size: 48px;
   font-weight: 500;
   font-family: 'Open Sans', sans-serif;
+  margin-bottom: 28px;
 }
 
 h3 {
   font-size: 36px;
   font-weight: 500;
   font-family: 'Open Sans', sans-serif;
+  margin-bottom: 24px;
 }
 
 h4 {
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 28px;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 20px;
 }
 
 h5 {
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 16px;
 }
 
 h6 {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.4;
 }
 `;

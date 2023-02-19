@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,9 +14,9 @@ export const FormWrapper = styled.div`
   padding: 22px 36px 36px;
   align-items: center;
   row-gap: 22px;
-  border: 2px solid ${(props) => props.theme.color.palette.grey['900']};
+  border: 2px solid ${({ theme }) => theme.color.palette.grey['900']};
   border-radius: ${({ theme }) => theme.border.radius};
-  background-color: ${(props) => props.theme.color.palette.grey['800']};
+  background-color: ${({ theme }) => theme.color.palette.grey['800']};
   box-shadow: ${({ theme }) => theme.shadow[1]};
 `;
 

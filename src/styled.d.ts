@@ -21,6 +21,7 @@ declare module 'styled-components' {
     color: {
       error: string;
       warning: string;
+      success: string;
       palette: {
         [key in PaletteName]: Palette;
       };

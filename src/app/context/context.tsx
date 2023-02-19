@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import { store } from '../store/app.store';
-import { GlobalStyle, theme } from '../theme/theme';
+import { GlobalStyle, appTheme } from '../theme/theme';
 
 export const AppContex: FunctionComponent<PropsWithChildren> = ({ children }) => (
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={appTheme}>
       <Normalize />
       <GlobalStyle />
       {children}

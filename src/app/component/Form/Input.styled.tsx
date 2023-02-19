@@ -7,7 +7,7 @@ const commonInputStyle = css`
   padding: 8px 14px;
   outline: none;
   border: none;
-  color: ${(props) => props.theme.color.palette.grey['50']};
+  color: ${({ theme }) => theme.color.palette.grey['50']};
 `;
 
 export const Input = styled.input`
@@ -23,10 +23,10 @@ export const TextArea = styled.textarea`
 export const Error = styled.div`
   color: ${({ theme }) => theme.color.error};
   font-size: 12px;
-  padding: 6px 0 12px;
+  padding: 6px 8px 0px;
 `;
 
 export const Label = styled.label`
-  font-size: 12px;
+  font-size: 13px;
   padding: 8px 8px;
 `;
