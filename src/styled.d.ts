@@ -10,9 +10,20 @@ type Palette = {
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    shadow: string;
+    shadow: {
+      inset: string;
+      0: string;
+      1: string;
+    };
+    border: {
+      radius: string;
+    };
     color: {
-      [key in PaletteName]: Palette;
+      error: string;
+      warning: string;
+      palette: {
+        [key in PaletteName]: Palette;
+      };
     };
   }
 }
