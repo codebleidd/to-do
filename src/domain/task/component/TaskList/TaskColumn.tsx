@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../../../app/store/appStore.hook';
 import { TaskHelper } from '../../model/Taks.helper';
@@ -10,33 +10,48 @@ import { TaskColumnStyled } from './TaskColumn.styled';
 
 export interface TaskColumnProps {
   columnStatus: TaskStatusEnum;
+  setDraggedTaskType: React.Dispatch<React.SetStateAction<TaskStatusEnum | null>>;
+  draggedTaskType: TaskStatusEnum;
 }
 
-export const TaskColumn: FunctionComponent<TaskColumnProps> = ({ columnStatus }) => {
+export const TaskColumn: FunctionComponent<TaskColumnProps> = ({
+  columnStatus,
+  setDraggedTaskType,
+  draggedTaskType,
+}) => {
   const tasks = useAppSelector(TaskSelector.getTasksByStatus(columnStatus));
   const dispatch = useDispatch();
 
-  const onDrop = (e: React.DragEvent) => {
-    const id = e.dataTransfer.getData('task/id');
-    const status = e.dataTransfer.getData('task/status') as TaskStatusEnum;
+  const isTransferAllowed = useMemo(
+    () => TaskHelper.getIsTransferAllowed(draggedTaskType, columnStatus),
+    [draggedTaskType, columnStatus],
+  );
 
-    if (TaskHelper.getIsTransferAllowed(status, columnStatus)) {
-      dispatch(TaskAction.changeTaskStatus({ id, status: columnStatus }));
-    }
-  };
+  const onDrop = useCallback(
+    (e: React.DragEvent) => {
+      const id = e.dataTransfer.getData('task/id');
+      e.dataTransfer.effectAllowed = 'move';
+      setDraggedTaskType(null);
+
+      if (isTransferAllowed) {
+        dispatch(TaskAction.changeTaskStatus({ id, status: columnStatus }));
+      }
+    },
+    [columnStatus, dispatch, isTransferAllowed, setDraggedTaskType],
+  );
 
   const onDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
   return (
-    <TaskColumnStyled onDrop={onDrop} onDragOver={onDragOver}>
+    <TaskColumnStyled hasDragOver={isTransferAllowed} onDragOver={onDragOver} onDrop={onDrop}>
       <h4>{TaskHelper.getTaskColumnLabelByStatus(columnStatus)}</h4>
 
       {tasks.length < 1 ? <p>Nothing to see here 👻</p> : null}
 
       {tasks.map((task) => (
-        <Task {...task} key={task.id} />
+        <Task {...task} key={task.id} setDraggedTaskType={setDraggedTaskType} />
       ))}
     </TaskColumnStyled>
   );
