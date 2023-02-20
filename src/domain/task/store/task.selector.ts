@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from '../../../app/store/app.store';
+import { AppState } from '../../../app/store/appStore';
 import { TaskStatusEnum } from '../model/Task.enum';
 
 export class TaskSelector {
