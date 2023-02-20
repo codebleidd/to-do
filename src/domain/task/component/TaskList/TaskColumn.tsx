@@ -11,7 +11,7 @@ import { TaskColumnStyled } from './TaskColumn.styled';
 export interface TaskColumnProps {
   columnStatus: TaskStatusEnum;
   setDraggedTaskType: React.Dispatch<React.SetStateAction<TaskStatusEnum | null>>;
-  draggedTaskType: TaskStatusEnum;
+  draggedTaskType: TaskStatusEnum | null;
 }
 
 export const TaskColumn: FunctionComponent<TaskColumnProps> = ({
@@ -23,7 +23,8 @@ export const TaskColumn: FunctionComponent<TaskColumnProps> = ({
   const dispatch = useDispatch();
 
   const isTransferAllowed = useMemo(
-    () => TaskHelper.getIsTransferAllowed(draggedTaskType, columnStatus),
+    () =>
+      draggedTaskType ? TaskHelper.getIsTransferAllowed(draggedTaskType, columnStatus) : false,
     [draggedTaskType, columnStatus],
   );
 
