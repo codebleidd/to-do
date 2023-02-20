@@ -17,4 +17,12 @@ export class TaskHelper {
       [TaskStatusEnum.CLOSED]: 'Closed tasks',
     }[taskStatus];
   }
+
+  static getIsTransferAllowed(taskStatus: TaskStatusEnum, destinationStatus: TaskStatusEnum) {
+    return {
+      [TaskStatusEnum.CLOSED]: [TaskStatusEnum.PENDING, TaskStatusEnum.OPEN],
+      [TaskStatusEnum.PENDING]: [TaskStatusEnum.OPEN],
+      [TaskStatusEnum.OPEN]: [] as TaskStatusEnum[],
+    }[destinationStatus].includes(taskStatus);
+  }
 }

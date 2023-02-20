@@ -11,6 +11,5 @@ export declare namespace TaskModel {
   export type Create = {
     title: string;
     description: string;
-    status: TaskStatusEnum;
   };
 }
